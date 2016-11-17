@@ -61,14 +61,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\IrcFx\IrcFx\IrcFx.csproj">
       <Project>{940FA7E5-B8A1-4462-A649-FB1FA2D770E1}</Project>
       <Name>IrcFx</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\KerbalData\KerbalData.csproj">
+    <ProjectReference Include="..\KerbalData\KerbalData.csproj">
       <Project>{49A17C80-B8E5-4C9F-926B-2F4B0357234C}</Project>
       <Name>KerbalData</Name>
     </ProjectReference>

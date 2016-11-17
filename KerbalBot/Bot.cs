@@ -9,6 +9,8 @@
 using System;
 using IrcFx;
 using System.Collections.Generic;
+using System.IO;
+
 using Kerbcalc;
 namespace KerbalBot
 {
@@ -22,7 +24,9 @@ namespace KerbalBot
 		
 		public static void Main(string[] args){
 			Bot client=new Bot();
+		
 			client.Run();
+			
 		} 
 		
 		public void Run(){	
@@ -32,6 +36,18 @@ namespace KerbalBot
 			string userName="Kerbcalc";
 			string nickNames="kerbcalc kerbcalc1 kerbcalc2";
 			string password="nicetry.";
+			if(!File.Exists("password")){
+				FileStream fs=File.OpenWrite("password");
+				StreamWriter sw=new StreamWriter(fs);
+				Console.WriteLine("enter password");
+				sw.WriteLine(Console.ReadLine());
+				sw.Close();
+				sw.Dispose();
+			 }
+			StreamReader sr=new StreamReader(File.OpenRead("password"));
+			password=sr.ReadLine().Trim();
+			sr.Close();
+			sr.Dispose();
 			
 			IrcNetworkInfo mynet=new IrcNetworkInfo("bleh");
 			mynet.AddServer("irc.freenode.net",6667,password);

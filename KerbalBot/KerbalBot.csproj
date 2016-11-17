@@ -53,16 +53,9 @@
     <Compile Include="MessageHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\IrcFx\IrcFx\IrcFx.csproj">
       <Project>{940FA7E5-B8A1-4462-A649-FB1FA2D770E1}</Project>
       <Name>IrcFx</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\KerbalData\KerbalData.csproj">
-      <Project>{49A17C80-B8E5-4C9F-926B-2F4B0357234C}</Project>
-      <Name>KerbalData</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kerbcalc\Kerbcalc\Kerbcalc.csproj">
       <Project>{091109CA-E4DE-460D-9D0F-1009A53BFF00}</Project>
@@ -71,6 +64,10 @@
     <ProjectReference Include="..\..\Test\Test\Evaluator.csproj">
       <Project>{5F0FA4F3-A654-402E-824A-4FBBD9A8014C}</Project>
       <Name>Evaluator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KerbalData\KerbalData.csproj">
+      <Project>{49A17C80-B8E5-4C9F-926B-2F4B0357234C}</Project>
+      <Name>KerbalData</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

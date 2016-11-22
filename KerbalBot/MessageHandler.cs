@@ -43,6 +43,7 @@ namespace KerbalBot
 				                                                                  	}
 				                                                                  	return sb.ToString();
 				                                                                  })),2);
+				
 			}
 			if(text[0]==1 && text[text.Length-1]==1){
 				text=text.Trim(trimOut);

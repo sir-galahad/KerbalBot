@@ -18,7 +18,7 @@ namespace KerbalBot
 	class Bot
 	{
 		IrcSession mySession;
-		KerbalEval eval=new KerbalEval();
+		
 		string channel="#kerbalbotprogram";
 		
 		
@@ -52,7 +52,7 @@ namespace KerbalBot
 			IrcNetworkInfo mynet=new IrcNetworkInfo("bleh");
 			mynet.AddServer("irc.freenode.net",6667,password);
 			IrcUser me=new IrcUser("A. Realname",userName,nickNames.Split(" ".ToCharArray()));
-			mySession=new IrcSession(me,mynet,new MessageHandler());
+			mySession=new IrcSession(me,mynet,new MessageHandler(channel));
 			mySession.Connect();
 			if(mySession.Connected==true)
 				Console.WriteLine("Connected");
@@ -62,7 +62,7 @@ namespace KerbalBot
 			}
 			mySession.JoinChannel(channel,null);
 			
-			eval.SetCodeFinishedHandler((o,s)=>mySession.Msg(channel,s));
+			
 			
 			while(true){
 				string bleh=Console.ReadLine();

@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bot.cs" />
+    <Compile Include="EvaluateCommand.cs" />
+    <Compile Include="Fun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MessageHandler.cs" />
   </ItemGroup>
@@ -64,6 +66,10 @@
     <ProjectReference Include="..\..\Test\Test\Evaluator.csproj">
       <Project>{5F0FA4F3-A654-402E-824A-4FBBD9A8014C}</Project>
       <Name>Evaluator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Commands\Commands.csproj">
+      <Project>{763D3373-F6DE-43F4-8F99-1B1C2F2A93AB}</Project>
+      <Name>Commands</Name>
     </ProjectReference>
     <ProjectReference Include="..\KerbalData\KerbalData.csproj">
       <Project>{49A17C80-B8E5-4C9F-926B-2F4B0357234C}</Project>

@@ -8,7 +8,9 @@
  */
 using System;
 using IrcFx;
+using Commands;
 using Kerbcalc;
+using System.Text;
 namespace KerbalBot
 {
 	/// <summary>
@@ -16,20 +18,36 @@ namespace KerbalBot
 	/// </summary>
 	public class MessageHandler:IrcMessageHandlerAdapter
 	{
-	
-		public MessageHandler()
+		CommandList CList=null;
+		string Channel;
+		public MessageHandler(string channel)
 		{
-			
+			Channel=channel;
 		}
 		public override void OnChatMessage(IrcSession s,IrcUser sender, string target, string text){
 			char[] trimOut=new Char[1];
 			string cmd=null;
 			string key;
 			trimOut[0]='\x0001';
+			
+			if(CList==null){
+				CList=new CommandList();
+				CList.AddLocalCommand(new EvaluateCommand(s,Channel),2);
+				CList.AddLocalCommand(new CallCommand("!whatis",new CommandDelegate((o,a)=>Fun.WhatIs(a[1]))),2);
+				CList.AddLocalCommand(new BasicCommand("!ping","PONG!"),2);
+				CList.AddLocalCommand(new CallCommand("!help",new CommandDelegate((o,a)=>{
+				                                                                  	StringBuilder sb=new StringBuilder("Available commands: ");
+				                                                                  	foreach(string st in CList.GetCommands(2)){
+				                                                                  		sb.Append(st);
+				                                                                  		sb.Append(' ');
+				                                                                  	}
+				                                                                  	return sb.ToString();
+				                                                                  })),2);
+			}
 			if(text[0]==1 && text[text.Length-1]==1){
 				text=text.Trim(trimOut);
 				cmd=text.Split(' ')[0];
-				
+			
 				text=text.Remove(0,cmd.Length);
 				text=text.Trim();
 			}
@@ -40,11 +58,11 @@ namespace KerbalBot
 			else{
 				Console.WriteLine("<{0}> {1}",sender.CurrentNick,text);
 			}
-			if(key=="!calc"){
-				KerbalEval eval=new KerbalEval();
-				text=text.Remove(0,key.Length);
-				eval.SetCodeFinishedHandler((o,output)=>s.Msg(target,output));
-				eval.Evaluate(text);
+			if(target.ToLower()==Channel.ToLower()){
+				string outp=CList.Parse(2,text);
+				if(outp!=null){
+					s.Msg(Channel, CList.Parse(2,text));
+				}
 			}
 		}
 		public override void OnNotice(IrcSession s,IrcUser User, string Target, string Text){

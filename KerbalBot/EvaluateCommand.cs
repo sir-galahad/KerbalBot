@@ -17,7 +17,7 @@ namespace KerbalBot
 	/// </summary>
 	public class EvaluateCommand:ICommand 
 	{
-		KerbalEval eval;
+		
 		IrcSession Session;
 		string Channel;
 		int sent;
@@ -41,6 +41,7 @@ namespace KerbalBot
 				code=code+args[x];
 				code=code+" ";
 			}
+			KerbalEval eval;
 			eval=new KerbalEval();
 			eval.SetCodeFinishedHandler((o,output)=>{Session.Msg(Channel,output);sent++;});
 			eval.Evaluate(code);
